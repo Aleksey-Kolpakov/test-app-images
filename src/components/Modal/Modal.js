@@ -1,42 +1,62 @@
-import React, { Component } from 'react';
+import React, { useEffect } from 'react';
 import { createPortal } from 'react-dom';
-import PropTypes from 'prop-types';
-import styles from './Modal.module.css'
+import { useSelector, useDispatch } from 'react-redux';
+import operations from '../../redux/images/images-operations';
+import {
+  getComments,
+  getBigImage,
+  getModalId,
+} from '../../redux/images/images-selectors';
+import actions from '../../redux/images/images-actions';
+import styles from './Modal.module.css';
+import Form from '../Form/Form';
 
-const modalRoot = document.querySelector('#modal-root');
-class Modal extends Component {
-    closeModal = (event) => {
-        if (event.target === event.currentTarget) {
-            this.props.onCloseModal()
-        }
+const Modal = () => {
+  const modalRoot = document.querySelector('#modal-root');
+  const BigImageSrc = useSelector(getBigImage);
+  const id = useSelector(getModalId);
+  const comments = useSelector(getComments);
+  const dispatch = useDispatch();
+  const fetchModalData = () => dispatch(operations.openModalHandler(id));
+  const onCloseModal = () => dispatch(actions.closeModal());
+
+  useEffect(() => {
+    fetchModalData();
+  }, []);
+  const closeModal = event => {
+    if (event.target === event.currentTarget) {
+      onCloseModal();
     }
-    handleKeydown = event => {
-        if (event.code === "Escape") {
-            this.props.onCloseModal();
-        }
+  };
+  const escapeModal = event => {
+    if (event.code === 'Escape') {
+      onCloseModal();
     }
-    componentDidMount() {
-        window.addEventListener('keydown', this.handleKeydown);
-    }
-    componentWillUnmount() {
-        window.removeEventListener('keydown', this.handleKeydown);
-    }
-    render() {
-        const { src } = this.props
-        return createPortal(
-            <div onClick={this.closeModal} className={styles.Overlay}>
-                <div className={styles.Modal}>
-                    <img src={src} alt="" />
-                </div>
-            </div>,
-            modalRoot
-        );
-    }
-}
+  };
+  useEffect(() => {
+    window.addEventListener('keydown', escapeModal);
+    return () => {
+      window.removeEventListener('keydown', escapeModal);
+    };
+  }, []);
+
+  return createPortal(
+    <div onClick={closeModal} className={styles.Overlay}>
+      <div className={styles.Modal}>
+              <img src={BigImageSrc} alt="" />
+              <ul>
+                  {comments.map(comment => (
+                      <li key={comment.id}>
+                          <p>{comment.name}</p>
+                          <p>{comment.description}</p>
+                     </li>
+                 ))}
+              </ul>
+              <Form id={ id}/>
+      </div>
+    </div>,
+    modalRoot,
+  );
+};
 
 export default Modal;
-
-Modal.propTypes = {
-    src: PropTypes.string.isRequired,
-    onCloseModal: PropTypes.func.isRequired,
-}

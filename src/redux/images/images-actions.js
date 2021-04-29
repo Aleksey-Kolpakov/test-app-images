@@ -10,6 +10,7 @@ const resetError = createAction('resetError');
 const loaderOn = createAction('images/loaderOn');
 const loaderOff = createAction('images/loaderOff');
 const closeModal = createAction('images/closeModal');
+const openModal=createAction('images/openModal');
 
 export default {
   getImagesSucces,
@@ -21,4 +22,5 @@ export default {
   loaderOn,
   loaderOff,
   closeModal,
+  openModal
 };

@@ -1,9 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux'
+import actions from '../../redux/images/images-actions'
 import styles from './ImageGalleryItem.module.css'
-const ImageGalleryItem = ({ src, id, openImage }) => {
+const ImageGalleryItem = ({ src, id }) => {
+    const dispatch = useDispatch();
+    const openModal=()=>dispatch(actions.openModal(id))
     return (
-        <li onClick={() => openImage(id)} className={styles["ImageGalleryItm"]}>
+        <li onClick={() => openModal(id)} className={styles["ImageGalleryItm"]}>
             <img src={src} alt="" className={styles["ImageGalleryItem-image"]} />
         </li>
     );

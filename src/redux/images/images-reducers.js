@@ -10,6 +10,7 @@ const {
   loaderOn,
   loaderOff,
   closeModal,
+  openModal,
 } = actions;
 
 export const imagesRducer = createReducer([], {
@@ -18,7 +19,7 @@ export const imagesRducer = createReducer([], {
 
 export const commentsReducer = createReducer([], {
   [getCommentsSucces]: (_, { payload }) => [...payload],
-  [addCommentSucces]: (state, { payload }) => [...state, ...payload],
+  [addCommentSucces]: (state, { payload }) => [...state,payload],
   [closeModal]: () => [],
 });
 
@@ -36,3 +37,8 @@ export const loaderReducer = createReducer(false, {
   [loaderOn]: () => true,
   [loaderOff]: () => false,
 });
+
+export const modalIdReducer = createReducer('', {
+  [openModal]: (_, { payload }) => payload,
+  [closeModal]:()=>'',
+})
