@@ -2,7 +2,7 @@
   "name": "test-app-images-react",
   "version": "0.1.0",
   "private": true,
-  "homepage": "",
+  "homepage": "https://aleksey-kolpakov.github.io/test-app-images/",
   "dependencies": {
     "@reduxjs/toolkit": "^1.5.0",
     "@testing-library/jest-dom": "^5.11.9",

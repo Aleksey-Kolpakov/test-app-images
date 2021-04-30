@@ -10,6 +10,7 @@ import {
 import actions from '../../redux/images/images-actions';
 import styles from './Modal.module.css';
 import Form from '../Form/Form';
+import sprite from '../../close-sprite.svg';
 
 const Modal = () => {
   const modalRoot = document.querySelector('#modal-root');
@@ -44,7 +45,7 @@ const Modal = () => {
     <div onClick={closeModal} className={styles.Overlay}>
       <div className={styles.Modal}>
         <div className={styles.imageFormDesk}>
-          <img src={BigImageSrc} alt="image" />
+          <img className={styles.bigImage} src={BigImageSrc} alt="image" />
           <div className={styles.commentsBlock}>
             <ul className={styles.commentsMobile}>
               {comments.map(comment => (
@@ -65,6 +66,15 @@ const Modal = () => {
             </li>
           ))}
         </ul>
+        <button
+          type="button"
+          className={styles.closeButton}
+          onClick={()=>onCloseModal()}
+        >
+          <svg width="20" height="20">
+            <use href={sprite + '#icon-close'}></use>
+          </svg>
+        </button>
       </div>
     </div>,
     modalRoot,
