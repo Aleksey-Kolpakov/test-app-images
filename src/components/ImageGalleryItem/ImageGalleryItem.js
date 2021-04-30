@@ -18,5 +18,4 @@ export default ImageGalleryItem;
 ImageGalleryItem.propTypes = {
     src: PropTypes.string.isRequired,
     id: PropTypes.number.isRequired,
-    openImage: PropTypes.func.isRequired
 }

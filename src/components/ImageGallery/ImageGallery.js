@@ -1,22 +1,39 @@
-import React,{useEffect} from 'react';
-import { useSelector, useDispatch } from 'react-redux'
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import styles from './ImageGallery.module.css';
 import ImageGalleryItem from '../ImageGalleryItem/ImageGalleryItem';
 import operations from '../../redux/images/images-operations';
-import { getImages} from '../../redux/images/images-selectors';
+import Loader from 'react-loader-spinner';
+import {
+  getImages,
+  getError,
+  getIsLoading,
+} from '../../redux/images/images-selectors';
 
 const ImageGallery = () => {
-     const images = useSelector(getImages);
-    const dispatch = useDispatch();
-    const fetchImages = () => dispatch(operations.loadImagesHandler());
-    useEffect(() => {
-        fetchImages()
-    }, [])
+  const images = useSelector(getImages);
+  const error = useSelector(getError);
+  const loading = useSelector(getIsLoading);
+  const dispatch = useDispatch();
+  const fetchImages = () => dispatch(operations.loadImagesHandler());
+  useEffect(() => {
+    fetchImages();
+  }, []);
 
-    const openImage = () => {
-        console.log('working');
-    }
+  const openImage = () => {
+    console.log('working');
+  };
   return (
+  <>
+          {error && (
+        <>
+          <h1>Error</h1>
+          <p>{error}</p>
+        </>
+      )}
+      {loading && (
+        <Loader type="ThreeDots" color="#00BFFF" height={80} width={80} />
+      )}
     <ul className={styles.ImageGallery}>
       {images.map(image => (
         <ImageGalleryItem
@@ -26,7 +43,8 @@ const ImageGallery = () => {
           openImage={openImage}
         />
       ))}
-    </ul>
+      </ul>
+      </>
   );
 };
 

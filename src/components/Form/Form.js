@@ -49,7 +49,7 @@ const Form = ({ id }) => {
         <Loader type="ThreeDots" color="#00BFFF" height={80} width={80} />
       )}
       <form className={styles.form} onSubmit={addNewComment}>
-        <label>
+        <label className={styles.formLabel}>
           <input
             className={styles.input}
             type="text"
@@ -59,7 +59,7 @@ const Form = ({ id }) => {
             onChange={authorNameChange}
           />
         </label>
-        <label>
+        <label className={styles.formLabel}>
           <input
             className={styles.input}
             type="text"
@@ -78,3 +78,7 @@ const Form = ({ id }) => {
 };
 
 export default Form;
+
+Form.propTypes = {
+    id: PropTypes.number.isRequired,
+}

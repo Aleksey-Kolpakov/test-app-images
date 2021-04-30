@@ -43,16 +43,28 @@ const Modal = () => {
   return createPortal(
     <div onClick={closeModal} className={styles.Overlay}>
       <div className={styles.Modal}>
-              <img src={BigImageSrc} alt="" />
-              <ul>
-                  {comments.map(comment => (
-                      <li key={comment.id}>
-                          <p>{comment.name}</p>
-                          <p>{comment.description}</p>
-                     </li>
-                 ))}
-              </ul>
-              <Form id={ id}/>
+        <div className={styles.imageFormDesk}>
+          <img src={BigImageSrc} alt="image" />
+          <div className={styles.commentsBlock}>
+            <ul className={styles.commentsMobile}>
+              {comments.map(comment => (
+                <li key={comment.id} className={styles.listItem}>
+                  <p className={styles.authorText}>{comment.name}</p>
+                  <p className={styles.commentText}>{comment.description}</p>
+                </li>
+              ))}
+            </ul>
+            <Form id={id} />
+          </div>
+        </div>
+        <ul className={styles.commentsDesctop}>
+          {comments.map(comment => (
+            <li key={comment.id} className={styles.listItem}>
+              <p className={styles.authorText}>{comment.name}</p>
+              <p className={styles.commentText}>{comment.description}</p>
+            </li>
+          ))}
+        </ul>
       </div>
     </div>,
     modalRoot,
