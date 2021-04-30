@@ -10,7 +10,7 @@ import {
 import actions from '../../redux/images/images-actions';
 import styles from './Modal.module.css';
 import Form from '../Form/Form';
-import sprite from '../../close-sprite.svg';
+import sprite from '../../images/close-sprite.svg';
 
 const Modal = () => {
   const modalRoot = document.querySelector('#modal-root');
