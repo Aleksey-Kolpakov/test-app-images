@@ -20,12 +20,9 @@ const ImageGallery = () => {
     fetchImages();
   }, []);
 
-  const openImage = () => {
-    console.log('working');
-  };
   return (
-  <>
-          {error && (
+    <>
+      {error && (
         <>
           <h1>Error</h1>
           <p>{error}</p>
@@ -34,17 +31,16 @@ const ImageGallery = () => {
       {loading && (
         <Loader type="ThreeDots" color="#00BFFF" height={80} width={80} />
       )}
-    <ul className={styles.ImageGallery}>
-      {images.map(image => (
-        <ImageGalleryItem
-          key={image.image_id}
-          id={image.image_id}
-          src={image.src}
-          openImage={openImage}
-        />
-      ))}
+      <ul className={styles.ImageGallery}>
+        {images.map(image => (
+          <ImageGalleryItem
+            key={image.image_id}
+            id={image.image_id}
+            src={image.src}
+          />
+        ))}
       </ul>
-      </>
+    </>
   );
 };
 

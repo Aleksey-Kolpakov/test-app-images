@@ -18,14 +18,15 @@
 .Modal {
   background-color: white;
   overflow-x: hidden;
-  overflow-y: scroll;
+  overflow-y: auto;
   position: relative;
-  max-height: 500px;
+  height: 100%;
 }
 @media screen and (min-width: 768px) {
   .Modal {
     padding: 30px;
     display: flex;
+    height: auto;
   }
 }
 @media screen and (min-width: 768px) {
@@ -67,7 +68,7 @@
 }
 .bigImage {
   max-width: 320px;
-  height: auto;
+  height: 205px;
 }
 
 .closeButton {

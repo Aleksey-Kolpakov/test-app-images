@@ -7,7 +7,7 @@ const ImageGalleryItem = ({ src, id }) => {
     const dispatch = useDispatch();
     const openModal=()=>dispatch(actions.openModal(id))
     return (
-        <li onClick={() => openModal(id)} className={styles["ImageGalleryItm"]}>
+        <li onClick={() => openModal(id)} className={styles["ImageGalleryItem"]}>
             <img src={src} alt="" className={styles["ImageGalleryItem-image"]} />
         </li>
     );
